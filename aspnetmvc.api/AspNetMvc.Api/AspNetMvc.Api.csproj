@@ -93,9 +93,11 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\UsuariosTiposController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\OpahRedeContext.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\UsuarioTipo.cs" />
@@ -128,7 +130,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49344</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/AspNetMvc.Api</IISUrl>
+          <IISUrl>http://localhost/opah.aspnetmvc.api</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost/opah.aspnetmvc.api</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

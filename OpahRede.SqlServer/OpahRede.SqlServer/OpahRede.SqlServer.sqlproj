@@ -58,9 +58,11 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Table" />
+    <Folder Include="Script" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Table\Usuario.sql" />
     <Build Include="Table\UsuarioTipo.sql" />
+    <Build Include="Script\Usuario.sql" />
   </ItemGroup>
 </Project>
