@@ -15,7 +15,7 @@
     <RootNamespace>AspNetMvc.Api</RootNamespace>
     <AssemblyName>AspNetMvc.Api</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -96,7 +96,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\MootitRedeContext.cs" />
+    <Compile Include="Models\OpahRedeContext.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\UsuarioTipo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,7 +128,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49344</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49344/</IISUrl>
+          <IISUrl>http://localhost/AspNetMvc.Api</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

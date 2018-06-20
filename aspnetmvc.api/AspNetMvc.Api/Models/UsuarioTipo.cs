@@ -7,7 +7,7 @@ namespace AspNetMvc.Api.Models
     public class UsuarioTipo
     {
         [Required(ErrorMessage ="Identificador tipo de usuário deve ser preenchido.")]
-        public int UsuarioTipoId { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage ="Nome do tipo de usuário deve ser preenchido")]
         [MaxLength(50,ErrorMessage ="Nome do tipo de usuário deve conter até 50 caracteres.")]

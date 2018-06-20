@@ -4,11 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AspNetMvc.Api.Models
 {
-    [Table("Usuarios")]
+    [Table("Usuario")]
     public class Usuario
     {
         [Required(ErrorMessage ="Identificador do usuário deveser preenchido.")]
-        public int UsuarioId { get; set; }
+        [Key]
+        public int Id { get; set; }
 
         [Required(ErrorMessage ="Nome do usuário deve ser preenchido.")]
         [MaxLength(200, ErrorMessage ="O nome do usuário só pode conter até 200 caracteres.")]
@@ -26,7 +27,7 @@ namespace AspNetMvc.Api.Models
         [MaxLength(20, ErrorMessage ="Senha de acesso só pode conter até 20 caracteres.")]
         public string Senha { get; set; }
 
-        public UsuarioTipo UsuarioTipo { get; set; }
+        public int? UsuarioTipoId { get; set; }
 
         [Required(ErrorMessage ="Data e hora de cadastro do usuário deve ser preenchida.")]
         public DateTime CadastroDataHora { get; set; }
@@ -34,8 +35,8 @@ namespace AspNetMvc.Api.Models
         [Required(ErrorMessage ="Identificador do usuário deve ser preenchido.")]
         public int CadastroUsuarioId { get; set; }
 
-        public DateTime AtualizacaoDataHora { get; set; }
+        public DateTime? AtualizacaoDataHora { get; set; }
 
-        public int AtualizacaoUsuarioId { get; set; }
-    }
+        public int? AtualizacaoUsuarioId { get; set; }
+    } 
 }
