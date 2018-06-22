@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Swashbuckle.Application;
+using System.Web.Http;
 
 namespace AspNetMvc.Api
 {
@@ -9,6 +11,13 @@ namespace AspNetMvc.Api
     {
         public static void Register(HttpConfiguration config)
         {
+            config.Routes.MapHttpRoute(
+                 name: "RotaSwagger",
+                 routeTemplate: "",
+                 defaults: null,
+                 constraints: null,
+                 handler: new RedirectHandler((message => message.RequestUri.ToString()), "swagger"));
+
             // Serviços e configuração da API da Web
 
             // Rotas da API da Web
