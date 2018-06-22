@@ -59,10 +59,27 @@
     <Folder Include="Properties" />
     <Folder Include="Table" />
     <Folder Include="Script" />
+    <Folder Include="Script\PostDeployment" />
+    <Folder Include="Script\PreDeployment" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Table\Usuario.sql" />
-    <Build Include="Table\UsuarioTipo.sql" />
-    <Build Include="Script\Usuario.sql" />
+    <Build Include="Table\01-UsuarioTipo.sql" />
+    <Build Include="Table\02-Usuario.sql" />
+    <Build Include="Table\03-Endereco.sql" />
+    <Build Include="Table\04-UsuarioEndereco.sql" />
+    <Build Include="Table\05-CalculoHistoricoLog.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Script\PreDeployment\01-Script.UsuarioTipo.sql" />
+    <None Include="Script\PreDeployment\02-Script.Usuario.sql" />
+    <None Include="Script\PreDeployment\03-Script.Endereco.sql" />
+    <None Include="Script\PreDeployment\04-Script.UsuarioEndereco.sql" />
+    <None Include="Script\PreDeployment\05-Script.CalculoHistoricoLog.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script\PostDeployment\01-Script.Usuario.sql" />
+    <None Include="Script\PostDeployment\02-Script.Endereco.sql" />
+    <None Include="Script\PostDeployment\03-Script.UsuarioEndereco.sql" />
+    <None Include="Script\PostDeployment\04-Script.CalculoHistoricoLog.sql" />
   </ItemGroup>
 </Project>
