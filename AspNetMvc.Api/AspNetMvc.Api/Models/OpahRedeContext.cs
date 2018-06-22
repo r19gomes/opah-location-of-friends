@@ -17,6 +17,7 @@ namespace AspNetMvc.Api.Models
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<UsuarioEndereco> UsuariosEnderecos { get; set; }
+        public DbSet<CalculoHistoricoLog> CalculosHistoricosLogs { get; set; }
 
     }
 }

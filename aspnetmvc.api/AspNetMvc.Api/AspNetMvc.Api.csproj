@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CalculosHistoricosLogsController.cs" />
     <Compile Include="Controllers\EnderecosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\UsuariosEnderecosController.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CalculoHistoricoLog.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\OpahRedeContext.cs" />
     <Compile Include="Models\Usuario.cs" />
