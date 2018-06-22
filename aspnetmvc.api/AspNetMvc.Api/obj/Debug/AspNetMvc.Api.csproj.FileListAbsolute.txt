@@ -146,4 +146,3 @@ C:\Users\br.com.opah\opah-location-of-friends\AspNetMvc.Api\AspNetMvc.Api\obj\De
 C:\Users\br.com.opah\opah-location-of-friends\AspNetMvc.Api\AspNetMvc.Api\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\br.com.opah\opah-location-of-friends\AspNetMvc.Api\AspNetMvc.Api\bin\Swashbuckle.Core.dll
 C:\Users\br.com.opah\opah-location-of-friends\AspNetMvc.Api\AspNetMvc.Api\bin\WebActivatorEx.dll
-C:\Users\br.com.opah\opah-location-of-friends\AspNetMvc.Api\AspNetMvc.Api\obj\Debug\AspNetMvc.Api.csprojResolveAssemblyReference.cache

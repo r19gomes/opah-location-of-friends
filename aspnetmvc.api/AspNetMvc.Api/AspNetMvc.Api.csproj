@@ -97,6 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Scripts.TSQL\01-usuario-tipo.sql" />
+    <Content Include="Scripts.TSQL\02-usuario.sql" />
+    <Content Include="Scripts.TSQL\03-endereco.sql" />
+    <Content Include="Scripts.TSQL\04-endereco-insert.sql" />
+    <Content Include="Scripts.TSQL\05-usuario-endereco.sql" />
+    <Content Include="Scripts.TSQL\06-calculo-historico-log.sql" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
