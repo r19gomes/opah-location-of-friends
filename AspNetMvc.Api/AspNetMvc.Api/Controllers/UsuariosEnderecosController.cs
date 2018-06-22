@@ -56,5 +56,58 @@ namespace AspNetMvc.Api.Controllers
             return Ok(usuariosEnderecos);
         }
 
+        [HttpPost]
+        public IHttpActionResult Post(UsuarioEndereco usuarioEndereco)
+        {
+            //  Retorna o erro 400.
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            //  Se valido, adiciona o registro.
+            db.UsuariosEnderecos.Add(usuarioEndereco);
+            db.SaveChanges();
+
+            //  Retorna 201
+            return CreatedAtRoute("DefaultApi", new
+            {
+                id = usuarioEndereco.UsuarioEnderecoId
+            }, usuarioEndereco);
+        }
+
+        [HttpPut]
+        public IHttpActionResult Put(int id, UsuarioEndereco usuarioEndereco)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // Erro 400
+
+            if (id != usuarioEndereco.UsuarioEnderecoId)
+                return BadRequest("O id informado a URL é diferente do id informado no corpo da requisição");
+
+            if (db.UsuariosEnderecos.Count(c => c.UsuarioEnderecoId == id) == 0)
+                return NotFound();
+
+            db.Entry(usuarioEndereco).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            if (id <= 0)
+                return BadRequest("O id deve ser um número maior que zero.");
+
+            var usuarioEndereco = db.UsuariosEnderecos.Find(id);
+
+            if (usuarioEndereco == null)
+                return NotFound();
+
+            db.UsuariosEnderecos.Remove(usuarioEndereco);
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
     }
 }

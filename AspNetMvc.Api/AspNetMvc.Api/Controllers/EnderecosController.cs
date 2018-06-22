@@ -56,6 +56,59 @@ namespace AspNetMvc.Api.Controllers
             return Ok(enderecos);
         }
 
+        [HttpPost]
+        public IHttpActionResult Post(Endereco endereco)
+        {
+            //  Retorna o erro 400.
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            //  Se valido, adiciona o registro.
+            db.Enderecos.Add(endereco);
+            db.SaveChanges();
+
+            //  Retorna 201
+            return CreatedAtRoute("DefaultApi", new
+            {
+                id = endereco.EnderecoId
+            }, endereco);
+        }
+
+        [HttpPut]
+        public IHttpActionResult Put(int id, Endereco endereco)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // Erro 400
+
+            if (id != endereco.EnderecoId)
+                return BadRequest("O id informado a URL é diferente do id informado no corpo da requisição");
+
+            if (db.Enderecos.Count(c => c.EnderecoId== id) == 0)
+                return NotFound();
+
+            db.Entry(endereco).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            if (id <= 0)
+                return BadRequest("O id deve ser um número maior que zero.");
+
+            var endereco = db.Enderecos.Find(id);
+
+            if (endereco == null)
+                return NotFound();
+
+            db.Enderecos.Remove(endereco);
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
     }
 }
 

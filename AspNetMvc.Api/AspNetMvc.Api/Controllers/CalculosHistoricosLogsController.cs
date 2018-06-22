@@ -34,7 +34,7 @@ namespace AspNetMvc.Api.Controllers
                 return BadRequest("O tamanho máximo de página permitido é 10.");
 
             int totalPaginas = (int)Math.Ceiling
-                (db.UsuariosTipos.Count() / Convert.ToDecimal(tamanhoPagina));
+                (db.CalculosHistoricosLogs.Count() / Convert.ToDecimal(tamanhoPagina));
 
             if (pagina > totalPaginas)
                 return BadRequest("A páginas solicitada não existe.");
@@ -56,5 +56,57 @@ namespace AspNetMvc.Api.Controllers
             return Ok(calculoHistoricoLog);
         }
 
+        [HttpPost]
+        public IHttpActionResult Post(CalculoHistoricoLog calculoHistoricoLog)
+        {
+            //  Retorna o erro 400.
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            //  Se valido, adiciona o registro.
+            db.CalculosHistoricosLogs.Add(calculoHistoricoLog);
+            db.SaveChanges();
+
+            //  Retorna 201
+            return CreatedAtRoute("DefaultApi", new
+            {
+                id = calculoHistoricoLog.CalculoHistoricoLogId
+            }, calculoHistoricoLog);
+        }
+
+        [HttpPut]
+        public IHttpActionResult Put(int id, CalculoHistoricoLog calculoHistoricoLog)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); // Erro 400
+
+            if (id != calculoHistoricoLog.CalculoHistoricoLogId)
+                return BadRequest("O id informado a URL é diferente do id informado no corpo da requisição");
+
+            if (db.CalculosHistoricosLogs.Count(c => c.CalculoHistoricoLogId == id) == 0)
+                return NotFound();
+
+            db.Entry(calculoHistoricoLog).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            if (id <= 0)
+                return BadRequest("O id deve ser um número maior que zero.");
+
+            var calculoHistoricoLog = db.CalculosHistoricosLogs.Find(id);
+
+            if (calculoHistoricoLog == null)
+                return NotFound();
+
+            db.CalculosHistoricosLogs.Remove(calculoHistoricoLog);
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
     }
 }

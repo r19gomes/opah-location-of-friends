@@ -95,12 +95,12 @@ namespace AspNetMvc.Api.Controllers
             if (id <= 0)
                 return BadRequest("O id deve ser um número maior que zero.");
 
-            var curso = db.Usuarios.Find(id);
+            var usuario = db.Usuarios.Find(id);
 
-            if (curso == null)
+            if (usuario == null)
                 return NotFound();
 
-            db.Usuarios.Remove(curso);
+            db.Usuarios.Remove(usuario);
             db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
