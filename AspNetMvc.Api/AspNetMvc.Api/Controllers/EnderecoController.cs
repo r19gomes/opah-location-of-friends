@@ -6,7 +6,7 @@ using System.Web.Http;
 
 namespace AspNetMvc.Api.Controllers
 {
-    public class UsuariosTiposController : ApiController
+    public class EnderecoController : ApiController
     {
         private OpahRedeContext db = new OpahRedeContext();
 
@@ -16,12 +16,12 @@ namespace AspNetMvc.Api.Controllers
             if (id <= 0)
                 return BadRequest("O id deve ser um numero maior que zero.");
 
-            var usuarioTipo = db.UsuariosTipos.Find(id);
+            var enderecos = db.Enderecos.Find(id);
 
-            if (usuarioTipo == null)
+            if (enderecos == null)
                 return NotFound(); // Erro 404
 
-            return Ok(usuarioTipo); // Sucesso 200
+            return Ok(enderecos); // Sucesso 200
         }
 
         [HttpGet]
@@ -34,7 +34,7 @@ namespace AspNetMvc.Api.Controllers
                 return BadRequest("O tamanho máximo de página permitido é 10.");
 
             int totalPaginas = (int)Math.Ceiling
-                (db.UsuariosTipos.Count() / Convert.ToDecimal(tamanhoPagina));
+                (db.Enderecos.Count() / Convert.ToDecimal(tamanhoPagina));
 
             if (pagina > totalPaginas)
                 return BadRequest("A páginas solicitada não existe.");
@@ -49,12 +49,13 @@ namespace AspNetMvc.Api.Controllers
                 System.Web.HttpContext.Current.Response.AddHeader("X-Pagination-NextPage",
                     Url.Link("DefaultApi", new { pagina = pagina + 1, tamanhoPagina = tamanhoPagina }));
 
-            var usuariosTipos = db.UsuariosTipos
+            var enderecos = db.Enderecos
                 .OrderBy(c => c.CadastroDataHora)
                     .Skip(tamanhoPagina * (pagina - 1)).Take(tamanhoPagina);
 
-            return Ok(usuariosTipos);
+            return Ok(enderecos);
         }
 
     }
 }
+

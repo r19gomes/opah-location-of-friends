@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\EnderecoController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\UsuariosTiposController.cs" />
     <Compile Include="Global.asax.cs">
@@ -100,6 +101,7 @@
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\OpahRedeContext.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\UsuarioEndereco.cs" />
     <Compile Include="Models\UsuarioTipo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

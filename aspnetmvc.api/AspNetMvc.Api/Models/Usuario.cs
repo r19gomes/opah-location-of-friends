@@ -9,7 +9,7 @@ namespace AspNetMvc.Api.Models
     {
         [Required(ErrorMessage ="Identificador do usuário deveser preenchido.")]
         [Key]
-        public int Id { get; set; }
+        public int UsuarioId { get; set; }
 
         [Required(ErrorMessage ="Nome do usuário deve ser preenchido.")]
         [MaxLength(200, ErrorMessage ="O nome do usuário só pode conter até 200 caracteres.")]

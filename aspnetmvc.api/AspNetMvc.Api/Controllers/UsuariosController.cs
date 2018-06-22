@@ -10,6 +10,7 @@ namespace AspNetMvc.Api.Controllers
     {
         private OpahRedeContext db = new OpahRedeContext();
 
+        [HttpGet]
         public IHttpActionResult Get(int id)
         {
             if (id <= 0)
@@ -23,6 +24,7 @@ namespace AspNetMvc.Api.Controllers
             return Ok(usuario); // Sucesso 200
         }
 
+        [HttpGet]
         public IHttpActionResult Get(int pagina = 1, int tamanhoPagina = 10)
         {
             if (pagina <= 0 || tamanhoPagina <= 0)
@@ -51,31 +53,34 @@ namespace AspNetMvc.Api.Controllers
             return Ok(usuarios);
         }
 
+        [HttpPost]
         public IHttpActionResult Post(Usuario usuario)
         {
             //  Retorna o erro 400.
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            //  Se valido, adiciona o registro.
             db.Usuarios.Add(usuario);
             db.SaveChanges();
 
             //  Retorna 201
             return CreatedAtRoute("DefaultApi", new
             {
-                id = usuario.Id
+                id = usuario.UsuarioId
             }, usuario);
         }
 
+        [HttpPut]
         public IHttpActionResult Put(int id, Usuario usuario)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState); // Erro 400
 
-            if (id != usuario.Id)
+            if (id != usuario.UsuarioId)
                 return BadRequest("O id informado a URL é diferente do id informado no corpo da requisição");
 
-            if (db.Usuarios.Count(c => c.Id == id) == 0)
+            if (db.Usuarios.Count(c => c.UsuarioId == id) == 0)
                 return NotFound();
 
             db.Entry(usuario).State = System.Data.Entity.EntityState.Modified;
@@ -84,6 +89,7 @@ namespace AspNetMvc.Api.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
             if (id <= 0)

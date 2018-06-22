@@ -15,5 +15,7 @@ namespace AspNetMvc.Api.Models
 
         public DbSet<UsuarioTipo> UsuariosTipos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
+
     }
 }

@@ -143,3 +143,4 @@ C:\Users\br.com.opah\opah-location-of-friends\AspNetMvc.Api\AspNetMvc.Api\obj\De
 C:\Users\br.com.opah\opah-location-of-friends\AspNetMvc.Api\AspNetMvc.Api\obj\Debug\AspNetMvc.Api.csproj.CopyComplete
 C:\Users\br.com.opah\opah-location-of-friends\AspNetMvc.Api\AspNetMvc.Api\obj\Debug\AspNetMvc.Api.dll
 C:\Users\br.com.opah\opah-location-of-friends\AspNetMvc.Api\AspNetMvc.Api\obj\Debug\AspNetMvc.Api.pdb
+C:\Users\br.com.opah\opah-location-of-friends\AspNetMvc.Api\AspNetMvc.Api\obj\Debug\AspNetMvc.Api.csprojResolveAssemblyReference.cache

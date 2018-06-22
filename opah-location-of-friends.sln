@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "console", "console", "{C5B04B7E-6DD3-426B-B00D-ACFE6BD7DEB8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infraestrutura", "infraestrutura", "{6AAF81C1-29FA-47EF-98FC-519AEEA38979}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infraestrutura", "3 - Infraestrutura", "{6AAF81C1-29FA-47EF-98FC-519AEEA38979}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "OpahRede.SqlServer", "OpahRede.SqlServer\OpahRede.SqlServer\OpahRede.SqlServer.sqlproj", "{5D0B8E62-0C37-4875-BDAA-85F7CC6E552F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "service", "service", "{2D19AB3D-C201-42E5-A0AB-558510B189FD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Servicos Distribuidos", "1 - Servicos Distribuidos", "{2D19AB3D-C201-42E5-A0AB-558510B189FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetMvc.Api", "AspNetMvc.Api\AspNetMvc.Api\AspNetMvc.Api.csproj", "{2EAB026E-64B6-49BB-991E-5DD4E788E4D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Apresentacao", "0 - Apresentacao", "{9D03CA0F-6C96-49E8-B0D5-D99992CB9284}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Dominio", "2 - Dominio", "{61977C06-2393-4AB0-9430-5F7C4741C142}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Testes", "4 - Testes", "{950075CE-E9AF-4167-AC51-D1D992237EA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
