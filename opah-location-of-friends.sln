@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Dominio", "2 - Dominio"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Testes", "4 - Testes", "{950075CE-E9AF-4167-AC51-D1D992237EA2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetMvc.UI", "AspNetMvc.UI\AspNetMvc.UI.csproj", "{ECC0A95F-BAF9-4257-86D4-A26C97FB6678}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2EAB026E-64B6-49BB-991E-5DD4E788E4D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EAB026E-64B6-49BB-991E-5DD4E788E4D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EAB026E-64B6-49BB-991E-5DD4E788E4D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECC0A95F-BAF9-4257-86D4-A26C97FB6678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECC0A95F-BAF9-4257-86D4-A26C97FB6678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECC0A95F-BAF9-4257-86D4-A26C97FB6678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECC0A95F-BAF9-4257-86D4-A26C97FB6678}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5D0B8E62-0C37-4875-BDAA-85F7CC6E552F} = {6AAF81C1-29FA-47EF-98FC-519AEEA38979}
 		{2EAB026E-64B6-49BB-991E-5DD4E788E4D7} = {2D19AB3D-C201-42E5-A0AB-558510B189FD}
+		{ECC0A95F-BAF9-4257-86D4-A26C97FB6678} = {9D03CA0F-6C96-49E8-B0D5-D99992CB9284}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2BE9B13E-B8CF-4575-9FCA-C0D2551EFA2E}

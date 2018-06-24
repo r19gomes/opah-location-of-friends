@@ -1,0 +1,72 @@
+﻿@model AspNetMvc.UI.Models.Security.UserViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="col-md-12 title">
+    Lista - Usuário
+</div>
+
+<div class="col-md-12 filtro">
+
+    @using (Html.BeginForm("Index", "Users", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new
+    {
+        @class = "form-horizontal",
+        role = "form"
+    }))
+    {
+        <h4>Filtro de Pesquisa</h4>
+
+        <div class="col-md-12 jump-line">&nbsp;</div>
+
+        <div class="container">
+            <div class="col-md-12" style="min-height: 2em !important;vertical-align: middle">
+                <section id="labelRegistro">
+                    <div class="row">
+                        <div class="col-md-1 label-listing text-center">@Html.Label("Id")</div>
+                        <div class="col-md-3 label-listing text-center">@Html.LabelFor(m => m.Users.First().Nome)</div>
+                        <div class="col-md-2 label-listing text-center">@Html.LabelFor(m => m.Users.First().Apelido)</div>
+                        <div class="col-md-2 label-listing text-center">@Html.LabelFor(m => m.Users.First().Login)</div>
+                        <div class="col-md-1 label-listing text-center">Ações</div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-md-12">
+                <section id="labelRegistro">
+                    @{
+                        if (Model.Users != null)
+                        {
+                            foreach (var item in Model.Users)
+                            {
+                                //  Obtém os campos demonstrados no grid de resultado.
+                                //var hotelName = item.Name;
+                                //var hotelLocationName = string.Empty;
+                                //if (item.Location != null)
+                                //{
+                                //    var result = item.Location.FirstOrDefault();
+                                //    if (!string.IsNullOrEmpty(result.Name))
+                                //    {
+                                //        hotelLocationName = result.Name.ToString().Trim();
+                                //    }
+                                //}
+                                //  Exibe os conteúdos recuperados no grid de resultado.
+                                <div class="row">
+                                    <div class="col-md-1 content-listing">@item.UsuarioId</div>
+                                    <div class="col-md-3 content-listing">@item.Nome</div>
+                                    <div class="col-md-2 content-listing">@item.Apelido</div>
+                                    <div class="col-md-2 content-listing">@item.Login</div>
+                                    <div class="col-md-1 content-listing"></div>
+                                </div>
+                            }
+                        }
+                    }
+                </section>
+
+            </div>
+
+        </div>
+    }
+
+</div>
