@@ -17,7 +17,7 @@
     <AssemblyName>AspNetMvc.UI</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -232,7 +232,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50670</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50670/</IISUrl>
+          <IISUrl>http://localhost/opah.aspnetmvc.ui</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
