@@ -6,7 +6,7 @@
 
 <div class="col-md-12 filtro">
 
-    @using (Html.BeginForm("Index", "Users", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new
+    @using (Html.BeginForm("Index", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new
     {
         @class = "form-horizontal",
         role = "form"
@@ -33,10 +33,11 @@
             <div class="col-md-12 jump-line">&nbsp;</div>
 
             <div class="col-md-12" style="padding: 0em !important;">
-                <button class="btn btn-primary"
-                        onclick="location.href='@Url.Action("Create", "Users")'">
+                @Html.ActionLink("Cadastrar", "Create", "Create", new { @class = "btn btn-primary" })
+                @*<button class="btn btn-primary"
+                        onclick="location.href='/User/Create/'">
                     Cadastrar
-                </button>
+                </button>*@
             </div>
 
             <div class="col-md-12 jump-line">&nbsp;</div>

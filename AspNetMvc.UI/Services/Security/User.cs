@@ -64,5 +64,27 @@ namespace AspNetMvc.UI.Services.Security
 
             return ret;
         }
+
+        public static bool UserCreate(Models.Security.UserViewModel model)
+        {
+            var urlApi = ConfigurationManager.AppSettings["Api_Rede"];
+            var request = new Models.Security.User();
+
+            urlApi = @"http://localhost/opah.aspnetmvc.api/api/";
+
+            if (model != null)
+            {
+                if (model.User != null)
+                {
+                    request = model.User;
+                }
+            }
+
+            string reqString = JsonConvert.SerializeObject(request);
+            var retApiString = CallWebApi.CallWebApiPost(reqString, urlApi + "/usuarios/post");
+            //var retApi = JsonConvert.DeserializeObject<HotelResponse>(retApiString);
+
+            return false;
+        }
     }
 }

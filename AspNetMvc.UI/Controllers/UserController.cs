@@ -9,7 +9,7 @@ using PagedList;
 
 namespace AspNetMvc.UI.Controllers
 {
-    public class UsersController : Controller
+    public class UserController : Controller
     {
         [HttpGet]
         public ActionResult Index(int page = 1)
@@ -31,14 +31,30 @@ namespace AspNetMvc.UI.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            int x = 10;
-            return View("~/Views/Users/Create.cshtml");
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("Create")]
+        public ActionResult Create(UserViewModel model)
+        {
+            var success = Services.Security.User.UserCreate(model);
+            if (!success)
+            {
+                var vw = new UserViewModel();
+                //vw.Mensagem = "Erro na gravação";
+                return View(vw);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpGet]
         public ActionResult Edit()
         {
-            return View("Edit.cshtml");
+            return View();
         }
 
         [HttpGet]
