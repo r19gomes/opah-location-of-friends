@@ -4,10 +4,6 @@
     ViewBag.Title = "Index";
 }
 
-<div class="col-md-12 title">
-    Lista - Usuário
-</div>
-
 <div class="col-md-12 filtro">
 
     @using (Html.BeginForm("Index", "Users", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new
@@ -16,19 +12,45 @@
         role = "form"
     }))
     {
-        <h4>Filtro de Pesquisa</h4>
-
-        <div class="col-md-12 jump-line">&nbsp;</div>
-
         <div class="container">
+
+            <h4>Usuários</h4>
+
+            <div class="form-group col-md-12" style="margin-left: 0em !important;margin-top: 2em !important;padding-left: 0em !important">
+                <div class="form-inline col-md-12" style="min-height: 3em !important">
+                    <div class="form-group col-md-8" style="padding: 0em !important">
+                        <label for="userName">Nome:</label>
+                        <input type="text" class="form-control" id="userName" placeholder="Informe o nome do usuário"
+                               style="width: 90% !important">
+                        @Html.ValidationMessageFor(m => m.Users.First().Nome, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-md-4">
+                        <button type="submit" class="btn btn-default" onclick="beforeSubmit()">Consultar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 jump-line">&nbsp;</div>
+
+            <div class="col-md-12" style="padding: 0em !important;">
+                <button class="btn btn-primary"
+                        onclick="location.href='@Url.Action("Create", "Users")'">
+                    Cadastrar
+                </button>
+            </div>
+
+            <div class="col-md-12 jump-line">&nbsp;</div>
+
             <div class="col-md-12" style="min-height: 2em !important;vertical-align: middle">
                 <section id="labelRegistro">
-                    <div class="row">
-                        <div class="col-md-1 label-listing text-center">@Html.Label("Id")</div>
-                        <div class="col-md-3 label-listing text-center">@Html.LabelFor(m => m.Users.First().Nome)</div>
-                        <div class="col-md-2 label-listing text-center">@Html.LabelFor(m => m.Users.First().Apelido)</div>
-                        <div class="col-md-2 label-listing text-center">@Html.LabelFor(m => m.Users.First().Login)</div>
-                        <div class="col-md-1 label-listing text-center">Ações</div>
+                    <div class="row form-row-two-lines">
+                        <div class="col-md-1 label-listing form-text-center form-tow-lines">@Html.Label("Id")</div>
+                        <div class="col-md-3 label-listing form-text-center form-tow-lines">@Html.LabelFor(m => m.Users.First().Nome)</div>
+                        <div class="col-md-2 label-listing form-text-center form-tow-lines">@Html.LabelFor(m => m.Users.First().Apelido)</div>
+                        <div class="col-md-1 label-listing form-text-center form-tow-lines">@Html.LabelFor(m => m.Users.First().Login)</div>
+                        <div class="col-md-1 label-listing form-text-center form-tow-lines">@Html.Label("Atualizado Em")</div>
+                        <div class="col-md-1 label-listing form-text-center form-tow-lines">@Html.Label("Atualizado Por")</div>
+                        <div class="col-md-1 label-listing form-text-center form-tow-lines">Ações</div>
                     </div>
                 </section>
             </div>
@@ -41,23 +63,34 @@
                             foreach (var item in Model.Users)
                             {
                                 //  Obtém os campos demonstrados no grid de resultado.
-                                //var hotelName = item.Name;
-                                //var hotelLocationName = string.Empty;
-                                //if (item.Location != null)
-                                //{
-                                //    var result = item.Location.FirstOrDefault();
-                                //    if (!string.IsNullOrEmpty(result.Name))
-                                //    {
-                                //        hotelLocationName = result.Name.ToString().Trim();
-                                //    }
-                                //}
+                                var cadastroDataHora = item.CadastroDataHora;
+                                var cadastroUsuarioId = item.CadastroUsuarioId;
+                                var atualizacaoDataHora = item.AtualizacaoDataHora;
+                                var atualizacaoUsuarioId = item.AtualizacaoUsuarioId;
+                                var atualizacaoUsuarioNome = string.Empty;
+                                var dataHora = string.Empty;
+                                if (atualizacaoDataHora != null)
+                                {
+                                    dataHora = DateTime.Parse(item.AtualizacaoDataHora.ToString()).ToString("dd/MM/yyyy").Trim().Substring(0, 10);
+                                }
+                                else if (cadastroDataHora != null)
+                                {
+                                    dataHora = DateTime.Parse(item.CadastroDataHora.ToString()).ToString("dd/MM/yyyy").Trim().Substring(0, 10);
+                                }
                                 //  Exibe os conteúdos recuperados no grid de resultado.
                                 <div class="row">
-                                    <div class="col-md-1 content-listing">@item.UsuarioId</div>
+                                    <div class="col-md-1 content-listing form-text-center">@item.UsuarioId</div>
                                     <div class="col-md-3 content-listing">@item.Nome</div>
                                     <div class="col-md-2 content-listing">@item.Apelido</div>
-                                    <div class="col-md-2 content-listing">@item.Login</div>
-                                    <div class="col-md-1 content-listing"></div>
+                                    <div class="col-md-1 content-listing">@item.Login</div>
+                                    <div class="col-md-1 content-listing form-text-center">@dataHora</div>
+                                    <div class="col-md-1 content-listing form-text-center">@atualizacaoUsuarioNome</div>
+                                    <div class="col-md-1 content-listing form-text-center">
+                                        @Html.ActionLink("Editar", "Edit", new
+                                        {
+                                            id = item.UsuarioId
+                                        })
+                                    </div>
                                 </div>
                             }
                         }
@@ -70,3 +103,28 @@
     }
 
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        /*
+        ** Inicializa toda a página parcial ou view Hotel.
+        */
+        $(document).ready(function () {
+
+            let $userName = $("#userName");
+            if ($userName!= null) {
+                $userName.focus();
+            }
+
+        });
+
+        var beforeSubmit = function () {
+
+            let isValid = true;
+            let message = '';
+
+        }
+
+    </script>
+}

@@ -11,7 +11,7 @@ namespace AspNetMvc.UI.Controllers
 {
     public class UsersController : Controller
     {
-        // GET: Users
+        [HttpGet]
         public ActionResult Index(int page = 1)
         {
             var vw = new UserViewModel();
@@ -26,6 +26,25 @@ namespace AspNetMvc.UI.Controllers
                 vw.Users = users.ToPagedList(pageNumber, pageSize);
 
             return View(vw);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            int x = 10;
+            return View("~/Views/Users/Create.cshtml");
+        }
+
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            return View("Edit.cshtml");
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            return View();
         }
     }
 }
