@@ -37,7 +37,7 @@ namespace AspNetMvc.UI.Services.Common
             {
                 HttpWebResponse response;
                 response = (HttpWebResponse)request.GetResponse();
-                if (response.StatusCode == HttpStatusCode.OK)
+                if ((response.StatusCode == HttpStatusCode.Created) || (response.StatusCode == HttpStatusCode.OK))
                 {
                     Stream responseStream = response.GetResponseStream();
                     ret = new StreamReader(responseStream).ReadToEnd();

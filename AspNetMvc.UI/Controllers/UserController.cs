@@ -38,12 +38,11 @@ namespace AspNetMvc.UI.Controllers
         [ActionName("Create")]
         public ActionResult Create(UserViewModel model)
         {
-            var success = Services.Security.User.UserCreate(model);
-            if (!success)
+            var ret = Services.Security.User.UserCreate(model);
+            if (ret.User.UsuarioId > 0)
             {
-                var vw = new UserViewModel();
                 //vw.Mensagem = "Erro na gravação";
-                return View(vw);
+                return View(ret);
             }
             else
             {

@@ -4,6 +4,8 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
+using System.Web.Script.Serialization;
 
 namespace AspNetMvc.UI.Services.Security
 {
@@ -38,22 +40,22 @@ namespace AspNetMvc.UI.Services.Security
                         {
                             if (item.Value != null)
                             {
-                                register.UsuarioId = item.Key.ToLower().Trim() == 
+                                register.UsuarioId = item.Key.ToLower().Trim() ==
                                     "usuarioid" ? int.Parse(item.Value) : register.UsuarioId;
                                 register.Nome = item.Key.ToLower().Trim() == "nome" ? item.Value : register.Nome;
                                 register.Apelido = item.Key.ToLower().Trim() == "apelido" ? item.Value : register.Apelido;
                                 register.Email = item.Key.ToLower().Trim() == "email" ? item.Value : register.Email;
                                 register.Login = item.Key.ToLower().Trim() == "login" ? item.Value : register.Login;
                                 register.Senha = item.Key.ToLower().Trim() == "senha" ? item.Value : register.Senha;
-                                register.UsuarioTipoId = 
+                                register.UsuarioTipoId =
                                     item.Key.ToLower().Trim() == "usuariotipoId" ? int.Parse(item.Value) : register.UsuarioTipoId;
-                                register.CadastroDataHora 
-                                    = item.Key.ToLower().Trim() =="cadastrodatahora"? DateTime.Parse(item.Value) : register.CadastroDataHora;
-                                register.CadastroUsuarioId 
+                                register.CadastroDataHora
+                                    = item.Key.ToLower().Trim() == "cadastrodatahora" ? DateTime.Parse(item.Value) : register.CadastroDataHora;
+                                register.CadastroUsuarioId
                                     = item.Key.ToLower().Trim() == "cadastrousuarioid" ? int.Parse(item.Value) : register.CadastroUsuarioId;
-                                register.AtualizacaoDataHora 
-                                    = item.Key.ToLower().Trim() == "atualizacaodatahora"? DateTime.Parse(item.Value) : register.AtualizacaoDataHora;
-                                register.AtualizacaoUsuarioId = 
+                                register.AtualizacaoDataHora
+                                    = item.Key.ToLower().Trim() == "atualizacaodatahora" ? DateTime.Parse(item.Value) : register.AtualizacaoDataHora;
+                                register.AtualizacaoUsuarioId =
                                     item.Key.ToLower().Trim() == "atualizacaousuarioid" ? int.Parse(item.Value) : register.AtualizacaoUsuarioId;
                             }
                         }
@@ -65,12 +67,12 @@ namespace AspNetMvc.UI.Services.Security
             return ret;
         }
 
-        public static bool UserCreate(Models.Security.UserViewModel model)
+        public static Models.Security.UserViewModel UserCreate(Models.Security.UserViewModel model)
         {
             var urlApi = ConfigurationManager.AppSettings["Api_Rede"];
             var request = new Models.Security.User();
 
-            urlApi = @"http://localhost/opah.aspnetmvc.api/api/";
+            urlApi = @"http://localhost/opah.aspnetmvc.api/api";
 
             if (model != null)
             {
@@ -80,11 +82,62 @@ namespace AspNetMvc.UI.Services.Security
                 }
             }
 
+            request.Nome = "NomeTeste1";
+            request.Login = "LoginTeste1";
+            request.Senha = "SenhaTeste1";
+            request.CadastroDataHora = DateTime.Now;
+            request.CadastroUsuarioId = 1;
+
             string reqString = JsonConvert.SerializeObject(request);
             var retApiString = CallWebApi.CallWebApiPost(reqString, urlApi + "/usuarios/post");
-            //var retApi = JsonConvert.DeserializeObject<HotelResponse>(retApiString);
 
-            return false;
+            var ret = ConvertJsonStringToUser(retApiString);
+
+            return ret;
+        }
+
+        public static Models.Security.UserViewModel ConvertJsonStringToUser(string json)
+        {
+            var jss = new JavaScriptSerializer();
+            Dictionary<string, string> data = jss.Deserialize<Dictionary<string, string>>(json);
+            var result = new Models.Security.UserViewModel();
+            if (!string.IsNullOrEmpty(data["Apelido"]))
+            {
+                result.User.Apelido = data["Apelido"].ToString();
+            }
+            if (!string.IsNullOrEmpty(data["AtualizacaoDataHora"]))
+            {
+                result.User.AtualizacaoDataHora = DateTime.Parse(data["AtualizacaoDataHora"].ToString());
+            }
+            if (!string.IsNullOrEmpty(data["AtualizacaoUsuarioId"]))
+            {
+                result.User.AtualizacaoUsuarioId = int.Parse(data["AtualizacaoUsuarioId"].ToString());
+            }
+            result.User.CadastroDataHora = DateTime.Parse(data["CadastroDataHora"].ToString());
+            result.User.CadastroUsuarioId = int.Parse(data["CadastroUsuarioId"].ToString());
+            if (!string.IsNullOrEmpty(data["Email"]))
+            {
+                result.User.Email = data["Email"].ToString().Trim().ToLower();
+            }
+            if (!string.IsNullOrEmpty(data["Login"]))
+            {
+                result.User.Login = data["Login"].ToString().Trim().ToUpper();
+            }
+            if (!string.IsNullOrEmpty(data["Nome"]))
+            {
+                result.User.Nome = data["Nome"].ToString().Trim();
+            }
+            if (!string.IsNullOrEmpty(data["Senha"]))
+            {
+                result.User.Senha = data["Senha"].ToString().Trim();
+            }
+            result.User.UsuarioId = int.Parse(data["UsuarioId"].ToString());
+            if (!string.IsNullOrEmpty(data["UsuarioTipoId"]))
+            {
+                result.User.UsuarioTipoId = int.Parse(data["UsuarioTipoId"].ToString());
+            }
+
+            return result;
         }
     }
 }
