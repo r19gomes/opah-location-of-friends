@@ -1,0 +1,41 @@
+﻿@model AspNetMvc.UI.Models.Security.UserViewModel
+
+<div class="row form-group">
+    <div class="col-md-3">
+        <label for="viewUsuarioId">Identificador</label>
+        <input type="text" class="form-control" id="viewUsuarioId" name="viewUsuarioId"
+               aria-describedby="usuarioIdHelp" placeholder="" disabled />
+    </div>
+    <div class="col-md-6">
+        <label for="viewNome">Nome</label>
+        <input type="text" class="form-control" id="viewNome" name="Nome"
+               aria-describedby="nomeHelp" placeholder="Entre com o nome" />
+    </div>
+    <div class="col-md-3">
+        <label for="viewApelido">Apelido</label>
+        <input type="text" class="form-control" id="viewApelido" name="viewApelido"
+               aria-describedby="apelidoHelp" placeholder="Entre com o apelido" />
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-6">
+        <label for="viewLogin">Login:</label>
+        <input type="text" class="form-control" id="viewLogin" name="viewLogin"
+               aria-describedby="loginHelp" placeholder="Entre com o login de acesso" />
+    </div>
+    <div class="col-md-6">
+        <label for="viewSenha">Senha:</label>
+        <input type="password" class="form-control" id="viewSenha" name="viewSenha"
+               aria-describedby="senhaHelp" placeholder="Entre com a senha de acesso">
+    </div>
+</div>
+
+<div class="row form-group">
+    <div class="col-md-12">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="viewEmail" name="viewEmail"
+               aria-describedby="emailHelp" placeholder="Entre com o e-mail">
+        <small id="emailHelp" class="form-text text-muted">Nós nunca vamos compartilhar seu e-mail com mais ninguém..</small>
+    </div>
+</div>

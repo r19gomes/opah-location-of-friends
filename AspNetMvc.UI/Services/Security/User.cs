@@ -1,4 +1,5 @@
-﻿using AspNetMvc.UI.Services.Common;
+﻿using AspNetMvc.UI.Models.Security;
+using AspNetMvc.UI.Services.Common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -16,7 +17,7 @@ namespace AspNetMvc.UI.Services.Security
             var urlApi = ConfigurationManager.AppSettings["Api_Rede"];
             var request = new Models.Security.User();
 
-            urlApi = @"http://localhost/opah.aspnetmvc.api/api/";
+            urlApi = @"http://localhost:49344/api/";
 
             if (filter != null)
             {
@@ -67,31 +68,51 @@ namespace AspNetMvc.UI.Services.Security
             return ret;
         }
 
-        public static Models.Security.UserViewModel UserCreate(Models.Security.UserViewModel model)
+        /// <summary>
+        /// Cria um novo usuário.
+        /// </summary>
+        /// <param name="model">Modelo dos usuários</param>
+        /// <returns></returns>
+        public static UserViewModel UserCreate(UserViewModel model)
         {
             var urlApi = ConfigurationManager.AppSettings["Api_Rede"];
             var request = new Models.Security.User();
+            UserViewModel ret = new UserViewModel();
 
-            urlApi = @"http://localhost/opah.aspnetmvc.api/api";
-
-            if (model != null)
+            try
             {
-                if (model.User != null)
+                urlApi = @"http://localhost:49344//api";
+
+                if (model != null)
                 {
-                    request = model.User;
+                    if (model.User != null)
+                    {
+                        request = model.User;
+                    }
                 }
+
+                if (request != null)
+                {
+                    if (request.CadastroDataHora == null || request.CadastroDataHora <= DateTime.Now)
+                        request.CadastroDataHora = DateTime.Now;
+                    if (request.CadastroUsuarioId == 0)
+                        request.CadastroUsuarioId = 1;
+                }
+
+                string reqString = JsonConvert.SerializeObject(request);
+                var retApiString = CallWebApi.CallWebApiPost(reqString, urlApi + "/usuarios/post");
+
+                ret.Message = "Processado com sucesso!";
+                ret = ConvertJsonStringToUser(retApiString);
+                ret.Success = true;
+                ret.PersistFields = false;
             }
-
-            request.Nome = "NomeTeste1";
-            request.Login = "LoginTeste1";
-            request.Senha = "SenhaTeste1";
-            request.CadastroDataHora = DateTime.Now;
-            request.CadastroUsuarioId = 1;
-
-            string reqString = JsonConvert.SerializeObject(request);
-            var retApiString = CallWebApi.CallWebApiPost(reqString, urlApi + "/usuarios/post");
-
-            var ret = ConvertJsonStringToUser(retApiString);
+            catch (Exception ex)
+            {
+                ret.Success = false;
+                ret.PersistFields = true;
+                ret.Message = ex.Message.ToString();
+            }
 
             return ret;
         }

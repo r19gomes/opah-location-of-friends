@@ -4,57 +4,26 @@
     ViewBag.Title = "Usuario";
 }
 
-@using (Html.BeginForm("Create", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Create", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new
 {
-    @Html.HiddenFor(model => model.User.UsuarioId, new { @Id = "usuarioId" })
-    @Html.HiddenFor(model => model.User.Nome, new { @Id = "nome" })
-    @Html.HiddenFor(model => model.User.Apelido, new { @Id = "apelido" })
-    @Html.HiddenFor(model => model.User.Email, new { @Id = "email" })
+    @class = "form-horizontal",
+    role = "form"
+}))
+{
+    @Html.HiddenFor(model => model.User.UsuarioId, new { @Id = "UsuarioId" })
+    @Html.HiddenFor(model => model.User.Nome, new { @Id = "Nome" })
+    @Html.HiddenFor(model => model.User.Apelido, new { @Id = "Apelido" })
+    @Html.HiddenFor(model => model.User.Email, new { @Id = "Email" })
+    @Html.HiddenFor(model => model.User.Login, new { @Id = "Login" })
+    @Html.HiddenFor(model => model.User.Senha, new { @Id = "Senha" })
+    @Html.HiddenFor(model => model.PersistFields, new { @Id = "PersistFields" })
 
     <section>
 
-        <h2>Usuário</h2>
+        <h2>Cadastrar Novo Usuário</h2>
 
-        <div class="row form-group">
-            <div class="col-md-6">
-                <label for="usuarioId">Identificador</label>
-                <input type="text" class="form-control" id="usuarioUsuarioId"
-                       aria-describedby="usuarioIdHelp" placeholder="" disabled />
-            </div>
-            <div class="col-md-6">
-                <label for="apelido">Apelido</label>
-                <input type="text" class="form-control" id="usuarioApelido"
-                       aria-describedby="apelidoHelp" placeholder="Entre com o apelido" />
-            </div>
-        </div>
-
-        <div class="row form-group">
-            <div class="col-md-6">
-                <label for="usuarioNome">Nome</label>
-                <input type="text" class="form-control" id="nome"
-                       aria-describedby="nomeHelp" placeholder="Entre com o nome" />
-            </div>
-            <div class="col-md-6">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="usuarioEmail"
-                       aria-describedby="emailHelp" placeholder="Entre com o e-mail">
-                <small id="emailHelp" class="form-text text-muted">Nós nunca vamos compartilhar seu e-mail com mais ninguém..</small>
-            </div>
-        </div>
-
-        <div class="row form-group">
-            <div class="col-md-6">
-                <label for="login">Login:</label>
-                <input type="text" class="form-control" id="usuarioLogin"
-                       aria-describedby="loginHelp" placeholder="Entre com o login de acesso" />
-            </div>
-            <div class="col-md-6">
-                <label for="senha">Senha:</label>
-                <input type="password" class="form-control" id="usuarioSenha"
-                       aria-describedby="senhaHelp" placeholder="Entre com a senha de acesso">
-            </div>
-        </div>
-
+        @Html.Partial("Shared", Model)
+        
         <div class="row form-group">
             <br />
             <div class="col-md-12">
@@ -78,9 +47,15 @@
         */
         $(document).ready(function () {
 
-            let $apelido = $("#apelido");
-            if ($apelido != null) {
-                $apelido.focus();
+            $persistFields = $("#PersistFields");
+            if ($persistFields != null && $persistFields != undefined) {
+                if ($persistFields.val())
+                    alert('ok');
+            }
+
+            let $nome = $("#viewNome");
+            if ($nome != null && $nome != undefined) {
+                $nome.focus();
             }
 
         });
@@ -90,20 +65,38 @@
             let isValid = true;
             let message = '';
 
-            let $usuarioApelido = $("#usuarioApelido");
-            $("#apelido").val($usuarioApelido.val());
+            let $usuarioId = $("viewUsuarioId");
+            if ($usuarioId != null && $usuarioId != undefined) {
+                $("#UsuarioId").val($usuarioId.val());
+            }
 
-            let $usuarioNome = $("#usuarioNome");
-            $("#nome").val($usuarioNome.val());
+            let $nome = $("#viewNome");
+            if ($nome != null && $nome != undefined) {
+                $("#Nome").val($nome.val());
+            }
 
-            let $usuarioEmail = $("#usuarioEmail");
-            $("#email").val($usuarioEmail.val());
+            let $apelido = $("#viewApelido");
+            if ($apelido != null && $apelido != undefined) {
+                $("#Apelido").val($apelido.val());
+            }
 
-            let $usuarioLogin = $("#usuarioLogin");
-            $("#login").val($usuarioLogin.val());
+            let $email = $("#viewEmail");
+            if ($email != null && $email != undefined) {
+                $("#Email").val($email.val());
+            }
 
-            let $usuarioSenha = $("#usuarioSenha");
-            $("#senha").val($usuarioSenha.val());
+            let $login = $("#viewLogin");
+            if ($login != null && $login != undefined) {
+                $("#Login").val($login.val());
+            }
+
+            let $senha = $("#viewSenha");
+            if ($senha != null && $senha != undefined) {
+                $("#Senha").val($senha.val());
+            }
+        }
+
+        var afterSubmit = function () {
         }
 
     </script>

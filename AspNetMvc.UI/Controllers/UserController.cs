@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using AspNetMvc.UI.Models.Security;
+﻿using AspNetMvc.UI.Models.Security;
 using PagedList;
+using System;
+using System.Configuration;
+using System.Web.Mvc;
 
 namespace AspNetMvc.UI.Controllers
 {
@@ -39,9 +36,8 @@ namespace AspNetMvc.UI.Controllers
         public ActionResult Create(UserViewModel model)
         {
             var ret = Services.Security.User.UserCreate(model);
-            if (ret.User.UsuarioId > 0)
+            if (!ret.Success)
             {
-                //vw.Mensagem = "Erro na gravação";
                 return View(ret);
             }
             else

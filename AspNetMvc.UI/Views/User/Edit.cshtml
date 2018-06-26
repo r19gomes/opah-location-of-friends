@@ -1,7 +1,41 @@
-﻿
+﻿@model AspNetMvc.UI.Models.Security.UserViewModel
+
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Usuario";
 }
 
-<h2>Edit</h2>
+@using (Html.BeginForm("Create", "User", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new
+{
+    @class = "form-horizontal",
+    role = "form"
+}))
+{
+    @Html.HiddenFor(model => model.User.UsuarioId, new { @Id = "UsuarioId" })
+    @Html.HiddenFor(model => model.User.Nome, new { @Id = "Nome" })
+    @Html.HiddenFor(model => model.User.Apelido, new { @Id = "Apelido" })
+    @Html.HiddenFor(model => model.User.Email, new { @Id = "Email" })
+    @Html.HiddenFor(model => model.User.Login, new { @Id = "Login" })
+    @Html.HiddenFor(model => model.User.Senha, new { @Id = "Senha" })
+    @Html.HiddenFor(model => model.PersistFields, new { @Id = "PersistFields" })
 
+    <section>
+
+        <h2>Editar Usuário</h2>
+
+        @Html.Partial("Shared", Model)
+
+        <div class="row form-group">
+            <br />
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary" onclick="beforeSubmit()">
+                    <span class="glyphicon glyphicon-floppy-saved"></span> Salvar
+                </button>
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Index", "User")'">
+                    <span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+                </button>
+            </div>
+        </div>
+
+    </section>
+
+}

@@ -10,7 +10,7 @@ namespace AspNetMvc.UI.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return Redirect("~/User/Index");
         }
 
         public ActionResult About()
