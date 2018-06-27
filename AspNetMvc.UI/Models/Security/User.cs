@@ -1,12 +1,15 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace AspNetMvc.UI.Models.Security
 {
     public class User
     {
+        [DisplayName("Identificador")]
         public int UsuarioId { get; set; }
 
+        [Required]
         [StringLength(200, ErrorMessage = @"O nome deve ter tamanho no máximo 200.")]
         public string Nome { get; set; }
 
@@ -16,9 +19,11 @@ namespace AspNetMvc.UI.Models.Security
         [StringLength(200, ErrorMessage = @"O endereço eletrônico deve ter tamanho no máximo 200.")]
         public string Email { get; set; }
 
+        [Required]
         [StringLength(30, ErrorMessage = @"O login deve ter tamanho no máximo 20.")]
         public string Login { get; set; }
 
+        [Required]
         [StringLength(20, ErrorMessage = @"A senha deve ter tamanho no máximo 20.")]
         public string Senha { get; set; }
 

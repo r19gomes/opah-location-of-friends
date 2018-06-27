@@ -35,21 +35,39 @@ namespace AspNetMvc.UI.Controllers
         [ActionName("Create")]
         public ActionResult Create(UserViewModel model)
         {
-            var ret = Services.Security.User.UserCreate(model);
-            if (!ret.Success)
+            if (ModelState.IsValid)
             {
-                return View(ret);
+                var ret = Services.Security.User.UserCreate(model);
+                if (!ret.Success)
+                {
+                    return View(ret);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
             else
             {
-                return RedirectToAction("Index");
+                return View(model);
             }
         }
 
         [HttpGet]
-        public ActionResult Edit()
+        public ActionResult Edit(User user)
         {
-            return View();
+            if (user == null)
+                user = new User();
+
+            var UsuarioId = user.UsuarioId;
+
+            return View(new UserViewModel
+            {
+                Message = string.Empty,
+                Success = false,
+                PersistFields = false,
+                User = user
+            });
         }
 
         [HttpGet]

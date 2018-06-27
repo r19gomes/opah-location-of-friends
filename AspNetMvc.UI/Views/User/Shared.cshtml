@@ -4,16 +4,20 @@
     <div class="col-md-3">
         <label for="viewUsuarioId">Identificador</label>
         <input type="text" class="form-control" id="viewUsuarioId" name="viewUsuarioId"
-               aria-describedby="usuarioIdHelp" placeholder="" disabled />
+               aria-describedby="usuarioIdHelp" placeholder=""
+               value="@Model.User.UsuarioId" disabled />
     </div>
     <div class="col-md-6">
         <label for="viewNome">Nome</label>
-        <input type="text" class="form-control" id="viewNome" name="Nome"
-               aria-describedby="nomeHelp" placeholder="Entre com o nome" />
+        <input type="text" class="form-control" id="viewNome" name="viewNome"
+               value="@Model.User.Nome" aria-describedby="nomeHelp"
+               placeholder="Entre com o nome" autofocus />
+        @Html.ValidationMessageFor(m=> m.User.Nome, "", new { @class = "text-danger" }) 
     </div>
     <div class="col-md-3">
         <label for="viewApelido">Apelido</label>
         <input type="text" class="form-control" id="viewApelido" name="viewApelido"
+               value="@Model.User.Apelido"
                aria-describedby="apelidoHelp" placeholder="Entre com o apelido" />
     </div>
 </div>
@@ -22,12 +26,16 @@
     <div class="col-md-6">
         <label for="viewLogin">Login:</label>
         <input type="text" class="form-control" id="viewLogin" name="viewLogin"
+               value="@Model.User.Login"
                aria-describedby="loginHelp" placeholder="Entre com o login de acesso" />
+        @Html.ValidationMessageFor(m => m.User.Login, "", new { @class = "text-danger" })
     </div>
     <div class="col-md-6">
         <label for="viewSenha">Senha:</label>
         <input type="password" class="form-control" id="viewSenha" name="viewSenha"
+               value="@Model.User.Senha"
                aria-describedby="senhaHelp" placeholder="Entre com a senha de acesso">
+        @Html.ValidationMessageFor(m => m.User.Senha, "", new { @class = "text-danger" })
     </div>
 </div>
 
@@ -35,7 +43,64 @@
     <div class="col-md-12">
         <label for="email">Email:</label>
         <input type="email" class="form-control" id="viewEmail" name="viewEmail"
+               value="@Model.User.Email"
                aria-describedby="emailHelp" placeholder="Entre com o e-mail">
         <small id="emailHelp" class="form-text text-muted">Nós nunca vamos compartilhar seu e-mail com mais ninguém..</small>
     </div>
 </div>
+
+
+<script type="text/javascript">
+
+    /*
+    ** Inicializa toda a página parcial ou view Hotel.
+    */
+    $(document).ready(function () {
+
+        //let $nome = $("#viewNome");
+        //if ($nome != null && $nome != undefined) {
+        //    $nome.focus();
+        //}
+
+    });
+
+    var beforeSubmit = function () {
+
+        let isValid = true;
+        let message = '';
+
+        let $usuarioId = $("viewUsuarioId");
+        if ($usuarioId != null && $usuarioId != undefined) {
+            $("#UsuarioId").val($usuarioId.val());
+        }
+
+        let $nome = $("#viewNome");
+        if ($nome != null && $nome != undefined) {
+            $("#Nome").val($nome.val());
+        }
+
+        let $apelido = $("#viewApelido");
+        if ($apelido != null && $apelido != undefined) {
+            $("#Apelido").val($apelido.val());
+        }
+
+        let $email = $("#viewEmail");
+        if ($email != null && $email != undefined) {
+            $("#Email").val($email.val());
+        }
+
+        let $login = $("#viewLogin");
+        if ($login != null && $login != undefined) {
+            $("#Login").val($login.val());
+        }
+
+        let $senha = $("#viewSenha");
+        if ($senha != null && $senha != undefined) {
+            $("#Senha").val($senha.val());
+        }
+    }
+
+    var afterSubmit = function () {
+    }
+
+</script>

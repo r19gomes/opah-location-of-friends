@@ -35,9 +35,9 @@
             <div class="col-md-12" style="padding: 0em !important;">
                 @Html.ActionLink("Cadastrar", "Create", "Create", new { @class = "btn btn-primary" })
                 @*<button class="btn btn-primary"
-                        onclick="location.href='/User/Create/'">
-                    Cadastrar
-                </button>*@
+                            onclick="location.href='/User/Create/'">
+                        Cadastrar
+                    </button>*@
             </div>
 
             <div class="col-md-12 jump-line">&nbsp;</div>
@@ -89,7 +89,17 @@
                                     <div class="col-md-1 content-listing form-text-center">
                                         @Html.ActionLink("Editar", "Edit", new
                                         {
-                                            id = item.UsuarioId
+                                            UsuarioId = item.UsuarioId,
+                                            Nome = item.Nome,
+                                            Apelido = item.Apelido,
+                                            Email = item.Email,
+                                            Login = item.Login,
+                                            Senha = item.Senha,
+                                            UsuarioTipoId = item.UsuarioTipoId,
+                                            CadastroDataHora = item.CadastroDataHora,
+                                            CadastroUsuarioId = item.CadastroUsuarioId,
+                                            AtualizacaoDataHora = item.AtualizacaoDataHora,
+                                            AtualizacaoUsuarioId = item.AtualizacaoUsuarioId
                                         })
                                     </div>
                                 </div>
@@ -114,7 +124,7 @@
         $(document).ready(function () {
 
             let $userName = $("#userName");
-            if ($userName!= null) {
+            if ($userName != null) {
                 $userName.focus();
             }
 

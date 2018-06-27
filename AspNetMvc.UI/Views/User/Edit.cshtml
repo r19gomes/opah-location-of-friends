@@ -17,12 +17,20 @@
     @Html.HiddenFor(model => model.User.Login, new { @Id = "Login" })
     @Html.HiddenFor(model => model.User.Senha, new { @Id = "Senha" })
     @Html.HiddenFor(model => model.PersistFields, new { @Id = "PersistFields" })
-
+    
     <section>
 
         <h2>Editar Usuário</h2>
 
-        @Html.Partial("Shared", Model)
+        @{ 
+            var modelUser = new AspNetMvc.UI.Models.Security.UserViewModel();
+            if (Model != null)
+            {
+                modelUser = Model;
+            }
+        }
+
+        @Html.Partial("Shared", modelUser)
 
         <div class="row form-group">
             <br />
