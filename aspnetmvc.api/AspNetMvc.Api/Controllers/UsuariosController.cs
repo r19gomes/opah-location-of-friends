@@ -10,8 +10,18 @@ namespace AspNetMvc.Api.Controllers
     {
         private OpahRedeContext db = new OpahRedeContext();
 
+        [Route("usuarios")]
         [HttpGet]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get()
+        {
+            var user = db.Usuarios;
+
+            return Ok(user); // Sucesso 200
+        }
+
+        [Route("usuarios/{id:int}")]
+        [HttpGet]
+        public IHttpActionResult GetUserById(int id)
         {
             if (id <= 0)
                 return BadRequest("O id deve ser um numero maior que zero.");
@@ -24,35 +34,82 @@ namespace AspNetMvc.Api.Controllers
             return Ok(usuario); // Sucesso 200
         }
 
-        [HttpGet]
-        public IHttpActionResult Get(int pagina = 1, int tamanhoPagina = 10)
+        [Route("usuarios")]
+        [HttpPost]
+        public IHttpActionResult GetUser(Models.Usuario user)
         {
-            if (pagina <= 0 || tamanhoPagina <= 0)
+            var name = string.Empty;
+
+            var usuario = db.Usuarios;
+            if (user != null)
+            {
+                //  Pesquisar po ID?
+                if (user.UsuarioId > 0)
+                {
+                    var result = usuario.Where(u => u.UsuarioId == user.UsuarioId);
+                    return Ok(result);
+                }
+                //  Pesquisar por nome?
+                else if (!string.IsNullOrEmpty(user.Nome))
+                {
+                    if (user.Nome.Trim().Length > 0)
+                    {
+                        name = user.Nome.Trim();
+                    }
+                    var result = usuario.Where(u => u.UsuarioId > 0 && u.Nome == name);
+                    return Ok(result);
+                }
+                else
+                {
+                    return Ok(usuario);
+                }
+            }
+            else
+            {
+                return Ok(usuario);
+            }
+
+        }
+
+        [Route("usuarios/{page:int}/{pagesize:int}")]
+        [HttpGet]
+        public IHttpActionResult GetUserPage(int page = 1, int pageSize = 10)
+        {
+            if (page <= 0 || pageSize <= 0)
                 return BadRequest("Os parâmetros página e tamanhoPagina devem ser maiores que zero.");
 
-            if (tamanhoPagina > 10)
+            if (pageSize > 10)
                 return BadRequest("O tamanho máximo de página permitido é 10.");
 
-            int totalPaginas = (int)Math.Ceiling(db.Usuarios.Count() / Convert.ToDecimal(tamanhoPagina));
+            int totalPaginas = (int)Math.Ceiling(db.Usuarios.Count() / Convert.ToDecimal(pageSize));
 
-            if (pagina > totalPaginas)
+            if (page > totalPaginas)
                 return BadRequest("A páginas solicitada não existe.");
 
             System.Web.HttpContext.Current.Response.AddHeader("X-Pagination-TotalPages", totalPaginas.ToString());
 
-            if (pagina > 1)
+            if (page > 1)
                 System.Web.HttpContext.Current.Response.AddHeader("X-Pagination-PreviousPage",
-                    Url.Link("DefaultApi", new { pagina = pagina - 1, tamanhoPagina = tamanhoPagina }));
+                    Url.Link("DefaultApi", new
+                    {
+                        page = page - 1,
+                        pageSize = pageSize
+                    }));
 
-            if (pagina < totalPaginas)
+            if (page < totalPaginas)
                 System.Web.HttpContext.Current.Response.AddHeader("X-Pagination-NextPage",
-                    Url.Link("DefaultApi", new { pagina = pagina + 1, tamanhoPagina = tamanhoPagina }));
+                    Url.Link("DefaultApi", new
+                    {
+                        pagina = page + 1,
+                        pageSize = pageSize
+                    }));
 
-            var usuarios = db.Usuarios.OrderBy(c => c.CadastroDataHora).Skip(tamanhoPagina * (pagina - 1)).Take(tamanhoPagina);
+            var usuarios = db.Usuarios.OrderBy(c => c.CadastroDataHora).Skip(pageSize * (page - 1)).Take(pageSize);
 
             return Ok(usuarios);
         }
 
+        [Route("usuarios")]
         [HttpPost]
         public IHttpActionResult Post(Usuario usuario)
         {
@@ -71,6 +128,7 @@ namespace AspNetMvc.Api.Controllers
             }, usuario);
         }
 
+        [Route("usuarios")]
         [HttpPut]
         public IHttpActionResult Put(int id, Usuario usuario)
         {
@@ -89,6 +147,7 @@ namespace AspNetMvc.Api.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [Route("usuarios")]
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
